@@ -3,11 +3,23 @@ function moduleProject3() {
   // 👉 TASK 1 - Write a `buildNav` component that returns a nav
 
   function buildNav(links) {
-    //  ✨ do your magic here
-    return document.createElement('nav')
+    const nav = document.createElement('nav');
+
+    links.forEach(({ href, textContent, title }) => {
+      const navLink = document.createElement('a');
+
+      navLink.href = href;
+      navLink.title = title;
+      navLink.textContent = textContent;
+      
+      nav.appendChild(navLink);
+    });
+
+    return nav;
   }
 
   // ❗ DOM creation using your `buildNav` component (do not change):
+
   document.querySelector('header').appendChild(buildNav([
     { href: 'https://www.example.com', textContent: 'Home', title: 'Go to the home page' },
     { href: 'https://www.example.com/about', textContent: 'About', title: 'Learn more about our company' },
