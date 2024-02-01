@@ -11,7 +11,7 @@ function moduleProject3() {
       navLink.href = href;
       navLink.title = title;
       navLink.textContent = textContent;
-      
+
       nav.appendChild(navLink);
     });
 
@@ -28,10 +28,33 @@ function moduleProject3() {
     { href: 'https://www.example.com/contact', textContent: 'Contact', title: 'Get in touch with us' },
   ]))
 
+
   // 👉 TASK 2A - Write a `buildLearnerCard` component that returns a card
 
   function buildLearnerCard(learner, languages) {
-    //  ✨ do your magic here
+    const { id, fullName, dateOfBirth, favLanguage } = learner;
+
+    const language = 
+      languages.filter(language => language.id === favLanguage)[0].name;
+
+    const card = document.createElement('div');
+    const name = document.createElement('p');
+    const Id = document.createElement('p');
+    const dob = document.createElement('p');
+    const lang = document.createElement('p');
+
+    card.classList.add('learner-card');
+    name.textContent = fullName;
+    Id.textContent = 'Learner ID: ' + id;
+    dob.textContent = 'Date of Birth: ' + dateOfBirth;
+    lang.textContent = 'Favorite Language: ' + language;
+
+    card.appendChild(name);
+    card.appendChild(Id);
+    card.appendChild(dob);
+    card.appendChild(lang);
+
+    return card;
   }
 
   {
@@ -51,7 +74,13 @@ function moduleProject3() {
       { id: 41, fullName: 'Sabah Beydoun', dateOfBirth: '1988-03-25', favLanguage: 91 },
       { id: 17, fullName: 'Daniel Castillo', dateOfBirth: '1995-11-05', favLanguage: 12 }
     ]
-    //  ✨ do your magic here
+
+    const section = document.querySelector('section');
+    
+    learners.forEach(learner => {
+      section.appendChild(buildLearnerCard(learner, languages));
+    });
+
   }
 
   // 👉 TASK 3 - Write a `buildFooter` component that returns a footer
