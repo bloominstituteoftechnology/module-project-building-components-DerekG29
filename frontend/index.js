@@ -54,8 +54,17 @@ function moduleProject3() {
     card.appendChild(dob);
     card.appendChild(lang);
 
+    card.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('.learner-card')
+        .forEach(card => card.classList.remove('active'));
+      card.classList.add('active');
+    });
+
     return card;
   }
+
+  const section = document.querySelector('section');
 
   {
     // 👉 TASK 2B - Use the two variables below to make learner Cards, and put them in the DOM
@@ -75,19 +84,64 @@ function moduleProject3() {
       { id: 17, fullName: 'Daniel Castillo', dateOfBirth: '1995-11-05', favLanguage: 12 }
     ]
 
-    const section = document.querySelector('section');
+    
     
     learners.forEach(learner => {
       section.appendChild(buildLearnerCard(learner, languages));
     });
-
   }
 
   // 👉 TASK 3 - Write a `buildFooter` component that returns a footer
 
   function buildFooter(footerData) {
-    //  ✨ do your magic here
-    return document.createElement('footer')
+    const footer = document.createElement('footer');
+
+    const companyInfo = document.createElement('div');
+      const companyName = document.createElement('p');
+      const address = document.createElement('p');
+      const email = document.createElement('p');
+        const emailLink = document.createElement('a');
+
+    const socials = document.createElement('div');
+      const twitter = document.createElement('a');
+      const facebook = document.createElement('a');
+      const instagram = document.createElement('a');
+
+    const copyright = document.createElement('div');
+    const year = new Date().getFullYear();
+
+    companyInfo.classList.add('company-info');
+    companyName.classList.add('company-name');
+    address.classList.add('address');
+    email.classList.add('contact-email');
+    socials.classList.add('social-media');
+
+    emailLink.href = 'mailto:' + footerData.contactEmail;
+    twitter.href = footerData.socialMedia.twitter;
+    facebook.href = footerData.socialMedia.facebook;
+    instagram.href = footerData.socialMedia.instagram;
+
+    companyName.textContent = footerData.companyName;
+    address.textContent = footerData.address;
+    email.textContent = 'Email: ';
+    emailLink.textContent = footerData.contactEmail;
+    twitter.textContent = 'Twitter';
+    facebook.textContent = 'Facebook';
+    instagram.textContent = 'Instagram';
+    copyright.textContent = '© BLOOM INSTITUTE OF TECHNOLOGY ' + year;
+
+    footer.appendChild(companyInfo);
+    footer.appendChild(socials);
+    footer.appendChild(copyright);
+    companyInfo.appendChild(companyName);
+    companyInfo.appendChild(address);
+    companyInfo.appendChild(email);
+    email.insertAdjacentElement('beforeend', emailLink);
+    socials.appendChild(twitter);
+    socials.appendChild(facebook);
+    socials.appendChild(instagram);
+
+    return footer;
   }
 
   // ❗ DOM creation using your `buildFooter` component (do not change):
@@ -104,7 +158,10 @@ function moduleProject3() {
 
   // 👉 TASK 4 - Clicking on the section should deactivate the active card
 
-  //  ✨ do your magic here
+  section.addEventListener('click', () => {
+    document.querySelectorAll('.learner-card')
+      .forEach(card => card.classList.remove('active'));
+  });
 }
 
 // ❗ DO NOT CHANGE THIS CODE
